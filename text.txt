@@ -1,0 +1,78 @@
+class Store{
+    static getBook(){
+        let books;
+        if (localStorage.getItem('books') === null){
+            books = [];
+        }else{
+            books = JSON.parse(localStorage.getItem('books'));
+        }
+        return books;
+    }
+
+    static displayBook(){
+        const books = Store.getBook();
+        books.forEach(function(book){
+            const ui = new UI;
+            ui.addBookToList(book);
+        })
+    }
+
+    static addBook(book){
+        const books = Store.getBook();
+
+        books.push(book);
+
+        localStorage.setItem('books' , JSON.stringify(books));
+
+    }
+
+    static deleteBook(isbn){
+        const books = Store.getBook();
+
+        books.forEach(function(book, index){
+            if (book.isbn === isbn){
+                books.splice(index , 1);
+            }
+        })
+        localStorage.setItem('books' , JSON.stringify(books));
+    }
+    
+
+
+}
+
+    document.addEventListener('DOMContentLoaded' , Store.displayBook);
+
+
+ document.getElementById('book-list').addEventListener('click' , function(e){
+
+        const ui = new UI();
+        ui.deleteBook(e.target);
+        Store.deleteBook(e.target.parentElement.previousElementSibling.textContent);
+    
+        ui.alert('Bitch that was my lifetime work!', 'success');
+        e.preventDefault();
+    })
+    
+
+    UI.prototype.deleteBook = (target)=>{
+    if (target.className === 'delete'){
+        target.parentElement.parentElement.remove();
+    }
+}
+
+
+ui.deleteBook(e.target);
+
+
+document.getElementById('greeting').textContent = now.getHours()< 12 ?`Goodmorning David, what do you plan on doing today?`: now.getHours()>= 12 && now.getHours()<17 ? `Goodevening David, what do you plan on doing tonight?`:`Goodafternoon David, what do you plan on doing today?`;
+
+
+if (now.getHours()<12){
+  document.getElementById('greeting').textContent = `Goodmorning David, what do you plan on doing today?`;
+}else if(now.getHours()>12 && now.getHours()<17){
+  document.getElementById('greeting').textContent = `Goodafternoon David, what do you plan on doing today?`;
+}else{
+  document.getElementById('greeting').textContent = `Goodevening David, what do you plan on doing tonight?`;
+
+}
