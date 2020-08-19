@@ -73,6 +73,10 @@ input:focus{
     outline:none;
 }
 
+input::placeholder{
+    color: rgb(180, 180, 180);
+}
+
 button{
     border: 1px solid #333;
     padding: 1rem;
