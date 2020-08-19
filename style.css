@@ -40,7 +40,8 @@ main{
 input, .container li{
     border: 1px solid #333;
     border-radius: 3px;
-    width: 100%;   
+    width: 100%;
+    box-sizing: border-box;   
 
 }
 
@@ -48,27 +49,22 @@ input, .container li{
 .container li {
     list-style: none;
     font-size:2rem;
-    padding: 1rem 2rem;
-    padding-left: 5rem;
-    text-align: left;
-    padding-left: 0.8rem;
-}
-
-.container li i{
-    position: absolute;
-    right: 400px;
+    padding: 1rem 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 
 input{
-    height: 50px;
-    background: #fff;
+    height: 70px;
+    width: 100%;
+    box-sizing: border-box;   
     border: none;
-    padding: 5px;
     font-size: 1.5rem;
     margin: 2rem 0;
+    padding: 1em;
     background: #eaeaea;
-    padding-right: 2.5rem;
 }
 
 input:focus{
@@ -101,6 +97,10 @@ button:focus{
     cursor: pointer;
 }
 
+#greeting{
+    word-spacing: 3px;
+}
+
 @media screen and (max-width:600px){
     body{
         overflow-x: hidden;
@@ -126,21 +126,11 @@ button:focus{
 
     .container li{
         font-size: 12px;
-        padding: 0.5rem 1rem;
-        padding-left: 0.8rem;
-        margin: auto;
-        width: 70%;
-        text-align: left;
     }
 
-    .container li i{
-        right: 90px;
-    }
     input{
-        width: 75%;
-        height: 30px;
-        padding: 5px;
-        font-size:13px;
+        font-size: 12px;
+        height: 40px;
     }
 
 
@@ -148,40 +138,14 @@ button:focus{
         font-size: 13px;
     }
 }
-@media screen and (max-width:411px){
-    .container li i{
-        right: 75px;
-    }
-}
-@media screen and (max-width:360px){
-    .container li i{
-        right: 70px;
-    }
-}
 
-@media screen and (max-width:325px){
-    .container li i{
-        right: 60px;
-    }
-}
+
 
 @media screen and (max-height:500px){
    .container h1{
        margin-bottom: 0;
    }
    
-    .container li{
-        width:80%;
-        text-align: left;
-        margin: auto;
-        font-size:1.5rem;
-    }
+  
 
-    .container li i{
-    right: 100px;
-    }
-    
-    input{
-        width: 80%;
-    }
 }

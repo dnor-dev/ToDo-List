@@ -2,6 +2,7 @@ const addForm = document.querySelector(".add");
 var list = document.getElementById("list-items");
 const search = document.querySelector("#search-todo");
 
+
 //
 
 function GenerateTemplate(){}
@@ -51,7 +52,7 @@ class Store{
 
     todos.forEach(function(todo, index){
       if (item.parentElement.classList.contains('item')){
-        todos.splice(1 , index);
+        todos.splice(index, 1);
       }
     })
     localStorage.setItem('todos' , JSON.stringify(todos));
@@ -113,7 +114,15 @@ search.addEventListener("keyup", function () {
 
 document.addEventListener('DOMContentLoaded' , Store.displayTodo);
 
-
+var username = localStorage.getItem('username')? localStorage.getItem('username'): "anonymous";
 
 var now = new Date();
-document.getElementById('greeting').textContent = now.getHours()< 12 ?`Goodmorning David, what do you plan on doing today?`: now.getHours()>= 12 && now.getHours()<17 ? `Goodafternoon David, what do you plan on doing today?`:`Goodevening David, what do you plan on doing tonight?`;
+document.getElementById('greeting').textContent = now.getHours()< 12 ?`Goodmorning ${username}, what do you plan on doing today?`: now.getHours()>= 12 && now.getHours()<17 ? `Goodafternoon ${username}, what do you plan on doing today?`:`Goodevening ${username}, what do you plan on doing tonight?`;
+
+
+
+function updateUsername() { 
+  var doc = prompt("Please enter some text");
+  localStorage.setItem('username', doc);
+  alert("please refresh the page to see changes");
+}
