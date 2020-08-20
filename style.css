@@ -94,7 +94,7 @@ button:focus{
 
 
 .filtered{
-    display:none;
+    display:none !important;
 }
 
 .delete{

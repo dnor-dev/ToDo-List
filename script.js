@@ -7,10 +7,11 @@ const search = document.querySelector("#search-todo");
 
 function GenerateTemplate(){}
 
-
+let id = 0;
  GenerateTemplate.prototype.generateTemplate = (todo)=>{
-  let html = `<li class="item">${todo}<i class="fa fa-trash delete"></i></li>`;
+  let html = `<li class="item">${todo}<i id="${id}" class="fa fa-trash delete"></i></li>`;
   list.innerHTML += html;
+  id++;
 }
 
 class Store{
@@ -47,14 +48,11 @@ class Store{
      })
   } 
   
-  static deleteTodo(item){
+  static deleteTodo(index){
     const  todos = JSON.parse(localStorage.getItem('todos'));
 
-    todos.forEach(function(todo, index){
-      if (item.parentElement.classList.contains('item')){
-        todos.splice(index, 1);
-      }
-    })
+    todos.splice(index, 1);
+   
     localStorage.setItem('todos' , JSON.stringify(todos));
 
   }
@@ -94,8 +92,23 @@ list.addEventListener("click", function (e) {
     e.target.parentElement.remove();
   }
 
-  Store.deleteTodo(e.target);
+  Store.deleteTodo(e.target.id);
 });
+
+document.addEventListener('DOMContentLoaded' , Store.displayTodo);
+
+var username = localStorage.getItem('username')? localStorage.getItem('username'): "anonymous";
+
+var now = new Date();
+document.getElementById('greeting').textContent = now.getHours()< 12 ?`Goodmorning ${username}, what do you plan on doing today?`: now.getHours()>= 12 && now.getHours()<17 ? `Goodafternoon ${username}, what do you plan on doing today?`:`Goodevening ${username}, what do you plan on doing tonight?`;
+
+
+
+function updateUsername() { 
+  var doc = prompt("Please enter some text");
+  localStorage.setItem('username', doc);
+  window.location.href = "index.html";
+}
 
 const filterTodos = (term) => {
   Array.from(list.children)
@@ -111,18 +124,3 @@ search.addEventListener("keyup", function () {
   const term = search.value.trim().toLowerCase();
   filterTodos(term);
 });
-
-document.addEventListener('DOMContentLoaded' , Store.displayTodo);
-
-var username = localStorage.getItem('username')? localStorage.getItem('username'): "anonymous";
-
-var now = new Date();
-document.getElementById('greeting').textContent = now.getHours()< 12 ?`Goodmorning ${username}, what do you plan on doing today?`: now.getHours()>= 12 && now.getHours()<17 ? `Goodafternoon ${username}, what do you plan on doing today?`:`Goodevening ${username}, what do you plan on doing tonight?`;
-
-
-
-function updateUsername() { 
-  var doc = prompt("Please enter some text");
-  localStorage.setItem('username', doc);
-  alert("please refresh the page to see changes");
-}
