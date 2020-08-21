@@ -93,6 +93,7 @@ list.addEventListener("click", function (e) {
   }
 
   Store.deleteTodo(e.target.id);
+  id--;
 });
 
 document.addEventListener('DOMContentLoaded' , Store.displayTodo);
